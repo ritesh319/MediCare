@@ -1,0 +1,145 @@
+{
+  "collections": {
+
+    "users": {
+      "description": "Authentication & authorization store",
+      "sample": {
+        "_id": { "$oid": "65f1a2b3c4d5e6f7a8b9c0d1" },
+        "email": "doctor@hospital.com",
+        "password": "$2a$10$...(bcrypt hashed)",
+        "firstName": "Sarah",
+        "lastName": "Johnson",
+        "phone": "+11234567890",
+        "roles": ["ROLE_DOCTOR"],
+        "enabled": true,
+        "accountNonExpired": true,
+        "accountNonLocked": true,
+        "credentialsNonExpired": true,
+        "createdAt": { "$date": "2024-01-15T08:00:00Z" },
+        "updatedAt": { "$date": "2024-01-15T08:00:00Z" }
+      },
+      "indexes": [
+        { "key": { "email": 1 }, "unique": true }
+      ]
+    },
+
+    "patients": {
+      "description": "Patient health profiles and medical history",
+      "sample": {
+        "_id": { "$oid": "65f1a2b3c4d5e6f7a8b9c0d2" },
+        "userId": "65f1a2b3c4d5e6f7a8b9c0d1",
+        "firstName": "James",
+        "lastName": "Wilson",
+        "email": "patient@hospital.com",
+        "phone": "+19876543210",
+        "dateOfBirth": "1985-06-15",
+        "gender": "Male",
+        "bloodGroup": "O+",
+        "address": {
+          "street": "123 Main Street",
+          "city": "New York",
+          "state": "NY",
+          "zipCode": "10001",
+          "country": "USA"
+        },
+        "emergencyContact": {
+          "name": "Mary Wilson",
+          "relationship": "Spouse",
+          "phone": "+19876500001"
+        },
+        "medicalHistory": [
+          {
+            "id": "uuid-here",
+            "diagnosis": "Hypertension Stage 1",
+            "treatment": "Lifestyle changes and Atorvastatin 20mg daily",
+            "prescribedBy": "Dr. Sarah Johnson",
+            "date": "2024-01-10",
+            "notes": "Follow up in 3 months"
+          }
+        ],
+        "allergies": ["Penicillin", "Aspirin"],
+        "currentMedications": ["Atorvastatin 20mg"],
+        "createdAt": { "$date": "2024-01-15T08:00:00Z" },
+        "updatedAt": { "$date": "2024-01-15T08:00:00Z" }
+      },
+      "indexes": [
+        { "key": { "userId": 1 }, "unique": true },
+        { "key": { "email": 1 }, "unique": true }
+      ]
+    },
+
+    "doctors": {
+      "description": "Doctor profiles, credentials and availability",
+      "sample": {
+        "_id": { "$oid": "65f1a2b3c4d5e6f7a8b9c0d3" },
+        "userId": "65f1a2b3c4d5e6f7a8b9c0d1",
+        "firstName": "Sarah",
+        "lastName": "Johnson",
+        "email": "doctor@hospital.com",
+        "phone": "+11234567890",
+        "specialization": "Cardiology",
+        "qualification": "MBBS, MD (Cardiology)",
+        "licenseNumber": "MED-CAR-2019",
+        "experienceYears": 8,
+        "department": "Cardiology",
+        "bio": "Board-certified cardiologist specialising in preventive and interventional cardiology.",
+        "consultationFee": 150.0,
+        "isActive": true,
+        "rating": 4.8,
+        "totalReviews": 120,
+        "availabilitySchedule": [
+          { "dayOfWeek": "MONDAY", "startTime": "09:00", "endTime": "17:00", "slotDurationMinutes": 30, "isAvailable": true },
+          { "dayOfWeek": "TUESDAY", "startTime": "09:00", "endTime": "17:00", "slotDurationMinutes": 30, "isAvailable": true },
+          { "dayOfWeek": "WEDNESDAY", "startTime": "09:00", "endTime": "13:00", "slotDurationMinutes": 30, "isAvailable": true },
+          { "dayOfWeek": "THURSDAY", "startTime": "09:00", "endTime": "17:00", "slotDurationMinutes": 30, "isAvailable": true },
+          { "dayOfWeek": "FRIDAY", "startTime": "09:00", "endTime": "15:00", "slotDurationMinutes": 30, "isAvailable": true },
+          { "dayOfWeek": "SATURDAY", "startTime": "10:00", "endTime": "13:00", "slotDurationMinutes": 30, "isAvailable": false },
+          { "dayOfWeek": "SUNDAY", "startTime": "10:00", "endTime": "13:00", "slotDurationMinutes": 30, "isAvailable": false }
+        ],
+        "createdAt": { "$date": "2024-01-15T08:00:00Z" },
+        "updatedAt": { "$date": "2024-01-15T08:00:00Z" }
+      },
+      "indexes": [
+        { "key": { "userId": 1 }, "unique": true },
+        { "key": { "email": 1 }, "unique": true },
+        { "key": { "specialization": 1 } },
+        { "key": { "isActive": 1 } }
+      ]
+    },
+
+    "appointments": {
+      "description": "All appointment bookings with status lifecycle",
+      "sample": {
+        "_id": { "$oid": "65f1a2b3c4d5e6f7a8b9c0d4" },
+        "patientId": "65f1a2b3c4d5e6f7a8b9c0d2",
+        "patientName": "James Wilson",
+        "patientEmail": "patient@hospital.com",
+        "doctorId": "65f1a2b3c4d5e6f7a8b9c0d3",
+        "doctorName": "Sarah Johnson",
+        "doctorSpecialization": "Cardiology",
+        "appointmentDate": "2024-04-15",
+        "timeSlot": "10:00-10:30",
+        "startTime": "10:00",
+        "endTime": "10:30",
+        "status": "CONFIRMED",
+        "reasonForVisit": "Annual cardiac checkup",
+        "symptoms": "Occasional chest tightness",
+        "notes": "Patient prefers morning slots",
+        "diagnosis": null,
+        "prescription": null,
+        "consultationFee": 150.0,
+        "isPaid": false,
+        "cancellationReason": null,
+        "cancelledAt": null,
+        "createdAt": { "$date": "2024-04-10T09:30:00Z" },
+        "updatedAt": { "$date": "2024-04-10T09:30:00Z" }
+      },
+      "statusLifecycle": "PENDING → CONFIRMED → COMPLETED | CANCELLED | NO_SHOW",
+      "indexes": [
+        { "key": { "patientId": 1, "appointmentDate": -1 } },
+        { "key": { "doctorId": 1, "appointmentDate": 1, "status": 1 } },
+        { "key": { "doctorId": 1, "appointmentDate": 1, "timeSlot": 1 } }
+      ]
+    }
+  }
+}
