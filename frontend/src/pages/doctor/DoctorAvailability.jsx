@@ -29,7 +29,6 @@ export default function DoctorAvailability() {
         const doc = await doctorsApi.getByUserId(user.id)
         setDoctorId(doc.id)
         if (doc.availabilitySchedule?.length > 0) {
-          // Merge with defaults so all 7 days appear
           const merged = DAYS.map(day => {
             const existing = doc.availabilitySchedule.find(s => s.dayOfWeek === day)
             return existing || defaultSchedule.find(d => d.dayOfWeek === day)

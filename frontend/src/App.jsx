@@ -2,23 +2,19 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { ProtectedRoute } from './routes/ProtectedRoute'
 
-// Auth Pages
 import LoginPage    from './pages/auth/LoginPage'
 import RegisterPage from './pages/auth/RegisterPage'
 
-// Admin Pages
 import AdminDashboard   from './pages/admin/AdminDashboard'
 import AdminDoctors     from './pages/admin/AdminDoctors'
 import AdminPatients    from './pages/admin/AdminPatients'
 import AdminAppointments from './pages/admin/AdminAppointments'
 
-// Doctor Pages
 import DoctorDashboard     from './pages/doctor/DoctorDashboard'
 import DoctorProfile       from './pages/doctor/DoctorProfile'
 import DoctorAppointments  from './pages/doctor/DoctorAppointments'
 import DoctorAvailability  from './pages/doctor/DoctorAvailability'
 
-// Patient Pages
 import PatientDashboard    from './pages/patient/PatientDashboard'
 import PatientProfile      from './pages/patient/PatientProfile'
 import PatientAppointments from './pages/patient/PatientAppointments'

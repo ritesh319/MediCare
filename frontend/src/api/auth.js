@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-// Direct axios for auth (no interceptor loop)
 const authClient = axios.create({
   baseURL: '/api',
   headers: { 'Content-Type': 'application/json' },

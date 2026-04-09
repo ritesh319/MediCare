@@ -37,7 +37,6 @@ public class DataInitializer implements CommandLineRunner {
         seedSamplePatient();
     }
 
-    // ── Admin ─────────────────────────────────────────────────────────────────
     private void seedAdmin() {
         if (userRepository.existsByEmail("admin@hospital.com")) {
             log.info("Admin already exists, skipping.");
@@ -63,18 +62,15 @@ public class DataInitializer implements CommandLineRunner {
         log.info("Admin seeded: admin@hospital.com / admin1234");
     }
 
-    // ── Doctor ────────────────────────────────────────────────────────────────
     @SuppressWarnings("null")
     private void seedSampleDoctor() {
         final String email     = "doctor@hospital.com";
         final String firstName = "Harshdeep";
         final String lastName  = "Kaur";
 
-        // 1. Ensure the User record exists and has the right name
         User doctorUser;
         Optional<User> existingUser = userRepository.findByEmail(email);
         if (existingUser.isPresent()) {
-            // Update name in case it was seeded with old name before
             doctorUser = existingUser.get();
             doctorUser.setFirstName(firstName);
             doctorUser.setLastName(lastName);
@@ -100,11 +96,8 @@ public class DataInitializer implements CommandLineRunner {
             log.info("Doctor user created: {}", email);
         }
 
-        // 2. Ensure the Doctor profile exists (handles the case where
-        //    you accidentally deleted it from the Admin page)
         Optional<Doctor> existingDoctor = doctorRepository.findByUserId(doctorUser.getId());
         if (existingDoctor.isPresent()) {
-            // Update name fields in existing profile
             Doctor d = existingDoctor.get();
             d.setFirstName(firstName);
             d.setLastName(lastName);
@@ -112,7 +105,6 @@ public class DataInitializer implements CommandLineRunner {
             doctorRepository.save(d);
             log.info("Doctor profile updated to {} {}", firstName, lastName);
         } else {
-            // Profile was deleted — recreate it fully
             Doctor doctor = Doctor.builder()
                     .userId(doctorUser.getId())
                     .firstName(firstName)
@@ -148,14 +140,12 @@ public class DataInitializer implements CommandLineRunner {
         }
     }
 
-    // ── Patient ───────────────────────────────────────────────────────────────
     @SuppressWarnings("null")
     private void seedSamplePatient() {
         final String email     = "patient@hospital.com";
         final String firstName = "Kabir";
         final String lastName  = "Choudhury";
 
-        // 1. Ensure the User record has the right name
         User patientUser;
         Optional<User> existingUser = userRepository.findByEmail(email);
         if (existingUser.isPresent()) {
@@ -184,7 +174,6 @@ public class DataInitializer implements CommandLineRunner {
             log.info("Patient user created: {}", email);
         }
 
-        // 2. Ensure the Patient profile has the right name
         Optional<Patient> existingPatient = patientRepository.findByUserId(patientUser.getId());
         if (existingPatient.isPresent()) {
             Patient p = existingPatient.get();

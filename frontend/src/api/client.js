@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-// In production this reads VITE_API_BASE_URL from .env.production
-// In development it falls back to the Vite proxy at /api
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
 
 const apiClient = axios.create({
@@ -10,7 +8,6 @@ const apiClient = axios.create({
   timeout: 15000,
 })
 
-// Attach JWT to every request
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('hospital_token')
@@ -20,7 +17,6 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 )
 
-// Handle 401 and unwrap response data
 apiClient.interceptors.response.use(
   (response) => response.data?.data !== undefined ? response.data.data : response.data,
   (error) => {

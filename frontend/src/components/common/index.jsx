@@ -1,4 +1,3 @@
-// ── LoadingSpinner ────────────────────────────────────────────────────────────
 export function LoadingSpinner({ size = 'md', className = '' }) {
   const sizes = { sm: 'w-4 h-4', md: 'w-8 h-8', lg: 'w-12 h-12' }
   return (
@@ -8,7 +7,6 @@ export function LoadingSpinner({ size = 'md', className = '' }) {
   )
 }
 
-// ── StatusBadge ───────────────────────────────────────────────────────────────
 const statusMap = {
   PENDING:   'badge-pending',
   CONFIRMED: 'badge-confirmed',
@@ -21,7 +19,6 @@ export function StatusBadge({ status }) {
   return <span className={statusMap[status] ?? 'badge-pending'}>{status}</span>
 }
 
-// ── StatCard ──────────────────────────────────────────────────────────────────
 export function StatCard({ title, value, icon, color = 'blue', sub }) {
   const colors = {
     blue:   'bg-blue-50 text-blue-600',
@@ -45,7 +42,6 @@ export function StatCard({ title, value, icon, color = 'blue', sub }) {
   )
 }
 
-// ── Modal ─────────────────────────────────────────────────────────────────────
 export function Modal({ open, onClose, title, children, footer }) {
   if (!open) return null
   return (
@@ -67,7 +63,6 @@ export function Modal({ open, onClose, title, children, footer }) {
   )
 }
 
-// ── EmptyState ────────────────────────────────────────────────────────────────
 export function EmptyState({ icon = '📭', title, description, action }) {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
@@ -79,7 +74,6 @@ export function EmptyState({ icon = '📭', title, description, action }) {
   )
 }
 
-// ── Alert ─────────────────────────────────────────────────────────────────────
 export function Alert({ type = 'error', message, onDismiss }) {
   if (!message) return null
   const styles = {
@@ -98,7 +92,6 @@ export function Alert({ type = 'error', message, onDismiss }) {
   )
 }
 
-// ── FormField ─────────────────────────────────────────────────────────────────
 export function FormField({ label, error, required, children }) {
   return (
     <div>
@@ -113,7 +106,6 @@ export function FormField({ label, error, required, children }) {
   )
 }
 
-// ── PageHeader ────────────────────────────────────────────────────────────────
 export function PageHeader({ title, subtitle, action }) {
   return (
     <div className="flex items-start justify-between mb-6">

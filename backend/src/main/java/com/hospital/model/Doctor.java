@@ -43,7 +43,6 @@ public class Doctor {
     @Builder.Default
     private List<Availability> availabilitySchedule = new ArrayList<>();
 
-    // Use 'active' (not 'isActive') so Lombok generates isActive() and setActive() correctly
     private boolean active;
     private double rating;
     private int totalReviews;
@@ -60,7 +59,6 @@ public class Doctor {
         private String startTime;
         private String endTime;
         private int slotDurationMinutes;
-        // Use 'available' not 'isAvailable' to avoid Lombok naming issues
         private boolean available;
     }
 }
